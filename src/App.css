@@ -60,7 +60,7 @@ button:hover {
 .todo-list {
 	margin-bottom: 20px;
 	padding-bottom: 20px;
-	border-bottom: 1px solid #555555;	
+	border-bottom: 1px solid #555555;
 }
 
 .todo {
@@ -74,7 +74,8 @@ button:hover {
 	border-radius: 5px;
 }
 
-input, select {
+input,
+select {
 	padding: 5px;
 	margin-bottom: 10px;
 	border: 1px solid #DDDDDD;
@@ -84,4 +85,26 @@ input, select {
 
 .is-invalid {
 	border-color: red;
+}
+
+.filter,
+.search {
+	border-bottom: 1px solid #555555;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+
+.filter-options {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+	gap: 3rem;
+}
+
+.btnDiv {
+	margin-bottom: 10px;
+}
+
+.filter-options div {
+	flex: 1 1 0;
 }
