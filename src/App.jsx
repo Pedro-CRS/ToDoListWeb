@@ -39,12 +39,26 @@ const App = () => {
 		setTodos(newToDos);
 	}
 
+	const completeToDo = (id) => {
+		const newToDos = [...todos];
+		newToDos.map((todo) => todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo);
+
+		setTodos(newToDos);
+	}
+
+	const removeToDo = (id) => {
+		const newToDos = [...todos];
+		const filteredToDos = newToDos.filter((todo) => todo.id !== id ? todo : null);
+
+		setTodos(filteredToDos);
+	}
+
 	return (
 		<div className="app">
 			<h1>Lista de Tarefas</h1>
 			<div className="todo-list">
 				{todos.map((todo) => (
-					<ToDo key={todo.id} todo={todo} />
+					<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={removeToDo} />
 				))}
 			</div>
 			<ToDoForm addToDo={addToDo} />
