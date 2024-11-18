@@ -2,36 +2,77 @@ import { useState } from "react";
 import "./Home.css";
 
 import ToDo from "../../components/Home/ToDo";
-import ToDoForm from "../../components/Home/ToDoForm";
-import Search from "../../components/Home/Search";
-import Filter from "../../components/Home/Filter";
+import TaskForm from "../../components/Home/newTaskForm";
+import FiltersBtns from "../../components/Home/btnsFilters";
 
-const App = () => {
+const TodoPage = () => {
 	const [todos, setTodos] = useState([
 		{
 			id: 1,
 			text: "Criar funcionalidade X no sistema",
 			category: "Trabalho",
 			isCompleted: false,
+			color: "burlywood"
 		},
 		{
 			id: 2,
 			text: "Ir para academia",
 			category: "Pessoal",
 			isCompleted: false,
+			color: "green"
 		},
 		{
 			id: 3,
 			text: "Estudar React",
 			category: "Estudo",
 			isCompleted: false,
+			color: "pink"
+		},
+		{
+			id: 4,
+			text: "Criar funcionalidade X no sistema",
+			category: "Trabalho",
+			isCompleted: false,
+			color: "burlywood"
+		},
+		{
+			id: 5,
+			text: "Ir para academia",
+			category: "Pessoal",
+			isCompleted: false,
+			color: "green"
+		},
+		{
+			id: 6,
+			text: "Estudar React",
+			category: "Estudo",
+			isCompleted: false,
+			color: "pink"
+		},
+		{
+			id: 7,
+			text: "Criar funcionalidade X no sistema",
+			category: "Trabalho",
+			isCompleted: false,
+			color: "burlywood"
+		},
+		{
+			id: 8,
+			text: "Ir para academia",
+			category: "Pessoal",
+			isCompleted: false,
+			color: "green"
+		},
+		{
+			id: 9,
+			text: "Estudar React",
+			category: "Estudo",
+			isCompleted: false,
+			color: "pink"
 		},
 	]);
 
-	const [search, setSearch] = useState("");
-
 	const [filter, setFilter] = useState("All");
-	const [sort, setSort] = useState("Asc");
 
 	const addToDo = (text, category) => {
 		const newToDos = [
@@ -62,28 +103,30 @@ const App = () => {
 	}
 
 	return (
-		<div className="app">
-			<h1>Lista de Tarefas</h1>
-			<Search search={search} setSearch={setSearch} />
-			<Filter filter={filter} setFilter={setFilter} setSort={setSort} />
+		<div className="todo-container">
+			<main className="main-content">
+				<header>
+					<h1>All your tasks</h1>
 
-			<div className="todo-list">
-				{
-					todos.filter((todo) =>
-						filter === "All" ? true : filter === "Completed" ? todo.isCompleted : !todo.isCompleted
-					).filter((todo) =>
-						todo.text.toLowerCase().includes(search.toLowerCase()) ||
-						todo.category.toLowerCase().includes(search.toLowerCase())
-					).sort((a, b) =>
-						sort === "Asc" ? a.text.localeCompare(b.text) : b.text.localeCompare(a.text)
-					).map((todo) => (
-						<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={removeToDo} />
-					))
-				}
-			</div>
-			<ToDoForm addToDo={addToDo} />
+					<FiltersBtns setFilter={setFilter} />
+				</header>
+
+				<div className="tasks-list">
+					{
+						todos.filter((todo) =>
+							filter === "All" ? true : filter === "Done" ? todo.isCompleted : !todo.isCompleted
+						).map((todo) => (
+							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={removeToDo} />
+						))
+					}
+				</div>
+
+				<footer className="add-task-footer">
+					<TaskForm addToDo={addToDo} />
+				</footer>
+			</main>
 		</div>
-	)
-}
+	);
+};
 
-export default App;
+export default TodoPage;

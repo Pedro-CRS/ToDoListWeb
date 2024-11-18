@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ToDoForm = ({ addToDo }) => {
+const TaskForm = ({ addToDo }) => {
 	const [value, setValue] = useState("");
 	const [category, setCategory] = useState("");
 
@@ -32,21 +32,27 @@ const ToDoForm = ({ addToDo }) => {
 	}
 
 	return (
-		<div className="todo-form">
-			<h2>Criar Tarefa</h2>
+		<div className="new-task">
+			<h2>Criar tarefa</h2>
 
 			<form onSubmit={handleSubmit}>
-				<input id="inputCreateTask" type="text" placeholder="Enter a task" value={value} onChange={(e) => setValue(e.target.value)} />
+				<input id="inputCreateTask" type="text" placeholder="Digite o título da nova tarefa" value={value} onChange={(e) => setValue(e.target.value)} />
+
 				<select id="selectCategory" value={category} onChange={(e) => setCategory(e.target.value)}>
 					<option value="">Selecione uma categoria</option>
+					<option value="-1">Criar nova categoria</option>
 					<option value="Trabalho">Trabalho</option>
 					<option value="Pessoal">Pessoal</option>
 					<option value="Estudos">Estudos</option>
 				</select>
-				<button type="submit">Criar tarefa</button>
+
+				<div className="create-div">
+					<input className="hidden" id="inputCreateCategory" type="text" placeholder="Digite o título da nova categoria" />
+					<button className="create-btn" type="submit">Criar tarefa</button>
+				</div>
 			</form>
 		</div>
 	)
 }
 
-export default ToDoForm;
+export default TaskForm;
