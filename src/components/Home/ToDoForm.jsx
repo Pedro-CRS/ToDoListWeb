@@ -49,4 +49,4 @@ const ToDoForm = ({ addToDo }) => {
 	)
 }
 
-export default ToDoForm
+export default ToDoForm;
