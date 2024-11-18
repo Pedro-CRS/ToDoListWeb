@@ -1,16 +1,31 @@
 import React from "react";
-import ToDoActions from "./btnToDoActions";
+import CompleteToDo from "./chkCompleteToDo";
+import EditToDo from "./btnEditToDo";
+import DeleteToDo from "./btnDeleteToDo";
 
 const ToDo = ({ todo, onComplete, onRemove }) => {
 	return (
-		<div className="todo" style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-			<div className="content">
-				<p>{todo.text}</p>
-				<p className="category">({todo.category})</p>
+		<div key={todo.id} className={`task-item ${todo.isCompleted ? "done" : ""}`}>
+			<div className="task-checkbox">
+				<CompleteToDo todo={todo} onChange={onComplete} />
 			</div>
 
-			<ToDoActions onComplete={() => onComplete(todo.id)} onRemove={() => onRemove(todo.id)} />
-		</div >
+			<div className="task-details">
+				<label className="task-title">{todo.text}</label>
+
+				<div className="item-category">
+					<input className="rounded-checkbox" type="checkbox" disabled
+						style={{ backgroundColor: todo.color, borderColor: todo.color, }} />
+					<span className="task-category">{todo.category}</span>
+				</div>
+			</div>
+
+			<div className="task-actions">
+				<EditToDo todo={todo} />
+
+				<DeleteToDo todo={todo} onClick={onRemove} />
+			</div>
+		</div>
 	)
 }
 
