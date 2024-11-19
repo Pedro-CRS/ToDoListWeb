@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./Styles/general.css";
 
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import RegisterRoute from "./Routes/RegisterRoute";

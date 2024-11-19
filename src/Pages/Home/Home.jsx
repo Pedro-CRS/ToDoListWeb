@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Home.css";
+import stl from "../../Styles/Home.module.css";
 import ToDo from "../../components/Home/ToDo";
 import TaskForm from "../../components/Home/newTaskForm";
 import FiltersBtns from "../../components/Home/btnsFilters";
@@ -111,7 +111,7 @@ const TodoPage = () => {
 			cancelButtonText: "Cancelar",
 			allowOutsideClick: false,
 			allowEscapeKey: false,
-			reverseButtons: true,
+			// reverseButtons: true,
 		}).then((result) => {
 			if (result.isConfirmed) {
 				const newToDos = [...todos];
@@ -140,15 +140,15 @@ const TodoPage = () => {
 	};
 
 	return (
-		<div className="todo-container">
-			<main className="main-content">
+		<div className={stl.todoContainer}>
+			<main className={stl.mainContent}>
 				<header>
 					<h1>Todas as suas tarefas</h1>
 
 					<FiltersBtns setFilter={setFilter} />
 				</header>
 
-				<div className="tasks-list">
+				<div className={stl.tasksList}>
 					{
 						todos.filter((todo) =>
 							filter === "All" ? true : filter === "Done" ? todo.isCompleted : !todo.isCompleted
@@ -158,7 +158,7 @@ const TodoPage = () => {
 					}
 				</div>
 
-				<footer className="add-task-footer">
+				<footer className={stl.addTaskFooter}>
 					<TaskForm addToDo={addToDo} />
 				</footer>
 
