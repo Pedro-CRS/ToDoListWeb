@@ -1,0 +1,47 @@
+/* Estilos do modal */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+}
+
+.modal {
+	width: 50%;
+	padding: 20px;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal h3 {
+	margin-bottom: 20px;
+}
+
+.modal button {
+	opacity: 0.7;
+	color: white;
+	padding: 8px 12px;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+}
+
+.modal button:hover {
+	opacity: 1;
+}
+
+button.btnSave {
+	margin-right: 1rem;
+	background-color: #4CAF50;
+}
+
+button.btnCancel {
+	background-color: #f44336;
+}

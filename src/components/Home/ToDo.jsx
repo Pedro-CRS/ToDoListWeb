@@ -3,7 +3,7 @@ import CompleteToDo from "./chkCompleteToDo";
 import EditToDo from "./btnEditToDo";
 import DeleteToDo from "./btnDeleteToDo";
 
-const ToDo = ({ todo, onComplete, onRemove }) => {
+const ToDo = ({ todo, onComplete, onRemove, onEdit }) => {
 	return (
 		<div key={todo.id} className={`task-item ${todo.isCompleted ? "done" : ""}`}>
 			<div className="task-checkbox">
@@ -21,7 +21,7 @@ const ToDo = ({ todo, onComplete, onRemove }) => {
 			</div>
 
 			<div className={`task-actions ${todo.isCompleted ? "disabled noSelect" : ""} `}>
-				<EditToDo todo={todo} />
+				<EditToDo todo={todo} onClick={onEdit} />
 
 				<DeleteToDo todo={todo} onClick={onRemove} />
 			</div>
