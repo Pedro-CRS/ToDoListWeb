@@ -1,9 +1,12 @@
 import { useState } from "react";
 import "./Home.css";
-
 import ToDo from "../../components/Home/ToDo";
 import TaskForm from "../../components/Home/newTaskForm";
 import FiltersBtns from "../../components/Home/btnsFilters";
+import Modal from "../../components/Home/editTaskModal";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const TodoPage = () => {
 	const [todos, setTodos] = useState([
@@ -74,15 +77,16 @@ const TodoPage = () => {
 
 	const [filter, setFilter] = useState("All");
 
-	const addToDo = (text, category) => {
+	const addToDo = (text, category, createdNow) => {
 		const newToDos = [
-			...todos,
+			// ...todos,
 			{
 				id: todos.length + 1,
 				text: text,
 				category: category,
 				isCompleted: false,
-			}
+				createdNow: createdNow
+			}, ...todos
 		];
 
 		setTodos(newToDos);
@@ -96,11 +100,44 @@ const TodoPage = () => {
 	}
 
 	const removeToDo = (id) => {
-		const newToDos = [...todos];
-		const filteredToDos = newToDos.filter((todo) => todo.id !== id ? todo : null);
+		withReactContent(Swal).fire({
+			heightAuto: false,
+			title: "Deseja realmente deletar essa tarefa?",
+			position: "center",
+			icon: "warning",
+			showConfirmButton: true,
+			confirmButtonText: "Confirmar",
+			showCancelButton: true,
+			cancelButtonText: "Cancelar",
+			allowOutsideClick: false,
+			allowEscapeKey: false,
+			reverseButtons: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				const newToDos = [...todos];
+				const filteredToDos = newToDos.filter((todo) => todo.id !== id ? todo : null);
 
-		setTodos(filteredToDos);
+				setTodos(filteredToDos);
+			}
+		});
 	}
+
+	const [currentTask, setCurrentTask] = useState(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const handleEditClick = (task) => {
+		setCurrentTask(task);
+		setIsModalOpen(true);
+	};
+
+	const handleSaveEdit = (updatedTask) => {
+		setTodos(todos.map((todo) => (todo.id === updatedTask.id ? updatedTask : todo)));
+		setIsModalOpen(false);
+	};
+
+	const handleCloseModal = () => {
+		setIsModalOpen(false);
+	};
 
 	return (
 		<div className="todo-container">
@@ -116,7 +153,7 @@ const TodoPage = () => {
 						todos.filter((todo) =>
 							filter === "All" ? true : filter === "Done" ? todo.isCompleted : !todo.isCompleted
 						).map((todo) => (
-							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={removeToDo} />
+							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={removeToDo} onEdit={handleEditClick} />
 						))
 					}
 				</div>
@@ -124,6 +161,10 @@ const TodoPage = () => {
 				<footer className="add-task-footer">
 					<TaskForm addToDo={addToDo} />
 				</footer>
+
+				{isModalOpen && currentTask && (
+					<Modal task={currentTask} onSave={handleSaveEdit} onClose={handleCloseModal} />
+				)}
 			</main>
 		</div>
 	);

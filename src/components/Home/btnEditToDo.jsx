@@ -2,12 +2,12 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const DeleteToDo = ({ todo, onClick }) => {
+const EditToDo = ({ todo, onClick }) => {
 	return (
-		<button className="edit-btn" title="Editar tarefa" onClick={() => onClick(todo.id)}>
+		<button className="edit-btn" title="Editar tarefa" onClick={() => onClick(todo)}>
 			<FontAwesomeIcon icon={faPenToSquare} />
 		</button>
 	);
 };
 
-export default DeleteToDo;
+export default EditToDo;
