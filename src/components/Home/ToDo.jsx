@@ -10,7 +10,7 @@ const ToDo = ({ todo, onComplete, onRemove }) => {
 				<CompleteToDo todo={todo} onChange={onComplete} />
 			</div>
 
-			<div className="task-details">
+			<div className={`task-details ${todo.isCompleted ? "disabled noSelect" : ""} `}>
 				<label className="task-title">{todo.text}</label>
 
 				<div className="item-category">
@@ -20,7 +20,7 @@ const ToDo = ({ todo, onComplete, onRemove }) => {
 				</div>
 			</div>
 
-			<div className="task-actions">
+			<div className={`task-actions ${todo.isCompleted ? "disabled noSelect" : ""} `}>
 				<EditToDo todo={todo} />
 
 				<DeleteToDo todo={todo} onClick={onRemove} />

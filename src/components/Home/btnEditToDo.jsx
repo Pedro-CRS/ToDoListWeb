@@ -4,7 +4,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const DeleteToDo = ({ todo, onClick }) => {
 	return (
-		<button className="edit-btn" onClick={() => onClick(todo.id)}>
+		<button className="edit-btn" title="Editar tarefa" onClick={() => onClick(todo.id)}>
 			<FontAwesomeIcon icon={faPenToSquare} />
 		</button>
 	);

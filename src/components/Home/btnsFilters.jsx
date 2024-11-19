@@ -11,15 +11,15 @@ const HeaderBtnsActions = ({ setFilter }) => {
 	return (
 		<div className="filter-buttons">
 			<button className={`filter-btn ${activeFilter === "All" ? "active" : ""}`} onClick={() => handleClick("All")}>
-				All
+				Todas
 			</button>
 
 			<button className={`filter-btn ${activeFilter === "Done" ? "active" : ""}`} onClick={() => handleClick("Done")}>
-				Done
+				Completas
 			</button>
 
 			<button className={`filter-btn ${activeFilter === "Not-Done" ? "active" : ""}`} onClick={() => handleClick("Not-Done")}>
-				Not done
+				Incompletas
 			</button>
 		</div>
 	);
