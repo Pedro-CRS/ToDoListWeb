@@ -1,5 +1,5 @@
 .hidden {
-	display: none;
+	display: none !important;
 }
 
 .todo-container {
@@ -61,7 +61,7 @@ header h1 {
 	height: 80%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	padding: 0 3px 0 0;
+	padding: 0 0.7rem 0 0;
 	margin: 1rem 0;
 }
 
@@ -81,6 +81,8 @@ header h1 {
 }
 
 .task-checkbox {
+	min-width: 40px;
+	max-width: 40px;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -152,8 +154,12 @@ header h1 {
 }
 
 .task-actions {
+	min-width: 60px;
+	max-width: 60px;
 	height: 100%;
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	padding: 0.5rem;
 	gap: 0.5rem;
 	border-left: 1px solid #555555;
@@ -181,7 +187,7 @@ header h1 {
 }
 
 .create-div input,
-button {
+.create-div button {
 	margin: 5px 0 !important;
 }
 
@@ -228,4 +234,51 @@ select {
 .new-task {
 	padding: 0.5rem 0 0;
 	width: 100%;
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.3;
+}
+
+.noSelect {
+	-webkit-touch-callout: none;
+	/* ↑ iOS Safari */
+	-webkit-user-select: none;
+	/* ↑ Safari */
+	-khtml-user-select: none;
+	/* ↑ Konqueror HTML */
+	-moz-user-select: none;
+	/* ↑ Old versions of Firefox */
+	-ms-user-select: none;
+	/* ↑ Internet Explorer/Edge */
+	user-select: none;
+	/* ↑ Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+button {
+	color: #FFFFFF;
+}
+
+.isFirtsOfList {
+	margin-top: 0 !important;
+}
+
+.isLastOfList {
+	margin-bottom: 0 !important;
+}
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(193, 193, 193, 255);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(193, 193, 193, 255);
+	background-color: rgba(193, 193, 193, 255);
 }

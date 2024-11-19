@@ -106,7 +106,7 @@ const TodoPage = () => {
 		<div className="todo-container">
 			<main className="main-content">
 				<header>
-					<h1>All your tasks</h1>
+					<h1>Todas as suas tarefas</h1>
 
 					<FiltersBtns setFilter={setFilter} />
 				</header>

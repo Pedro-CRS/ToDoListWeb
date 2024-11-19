@@ -4,6 +4,8 @@ const TaskForm = ({ addToDo }) => {
 	const [value, setValue] = useState("");
 	const [category, setCategory] = useState("");
 
+	const [isCreatingCategory, setIsCreatingCategory] = useState(false);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -31,6 +33,15 @@ const TaskForm = ({ addToDo }) => {
 		}
 	}
 
+	const categoryOnChange = (selectedValue) => {
+		setCategory(selectedValue);
+
+		if (selectedValue === "-1")
+			setIsCreatingCategory(true);
+		else
+			setIsCreatingCategory(false);
+	};
+
 	return (
 		<div className="new-task">
 			<h2>Criar tarefa</h2>
@@ -38,8 +49,8 @@ const TaskForm = ({ addToDo }) => {
 			<form onSubmit={handleSubmit}>
 				<input id="inputCreateTask" type="text" placeholder="Digite o título da nova tarefa" value={value} onChange={(e) => setValue(e.target.value)} />
 
-				<select id="selectCategory" value={category} onChange={(e) => setCategory(e.target.value)}>
-					<option value="">Selecione uma categoria</option>
+				<select id="selectCategory" value={category} onChange={(e) => categoryOnChange(e.target.value)}>
+					<option value="" disabled>Selecione uma categoria</option>
 					<option value="-1">Criar nova categoria</option>
 					<option value="Trabalho">Trabalho</option>
 					<option value="Pessoal">Pessoal</option>
@@ -47,7 +58,7 @@ const TaskForm = ({ addToDo }) => {
 				</select>
 
 				<div className="create-div">
-					<input className="hidden" id="inputCreateCategory" type="text" placeholder="Digite o título da nova categoria" />
+					<input className={isCreatingCategory ? "" : "hidden"} id="newCategory" type="text" placeholder="Digite o título da nova categoria" />
 					<button className="create-btn" type="submit">Criar tarefa</button>
 				</div>
 			</form>
