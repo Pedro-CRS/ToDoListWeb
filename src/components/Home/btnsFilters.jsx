@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import stl from "../../Styles/Home.module.css";
 
 const HeaderBtnsActions = ({ setFilter }) => {
 	const [activeFilter, setActiveFilter] = useState("All");
@@ -9,16 +10,16 @@ const HeaderBtnsActions = ({ setFilter }) => {
 	};
 
 	return (
-		<div className="filter-buttons">
-			<button className={`filter-btn ${activeFilter === "All" ? "active" : ""}`} onClick={() => handleClick("All")}>
+		<div className={stl.filterButtons}>
+			<button className={`${stl.filterBtn} ${activeFilter === "All" ? stl.active : ""}`} onClick={() => handleClick("All")}>
 				Todas
 			</button>
 
-			<button className={`filter-btn ${activeFilter === "Done" ? "active" : ""}`} onClick={() => handleClick("Done")}>
+			<button className={`${stl.filterBtn} ${activeFilter === "Done" ? stl.active : ""}`} onClick={() => handleClick("Done")}>
 				Completas
 			</button>
 
-			<button className={`filter-btn ${activeFilter === "Not-Done" ? "active" : ""}`} onClick={() => handleClick("Not-Done")}>
+			<button className={`${stl.filterBtn} ${activeFilter === "Not-Done" ? stl.active : ""}`} onClick={() => handleClick("Not-Done")}>
 				Incompletas
 			</button>
 		</div>

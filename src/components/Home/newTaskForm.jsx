@@ -1,4 +1,5 @@
 import { useState } from "react";
+import stl from "../../Styles/Home.module.css";
 
 const TaskForm = ({ addToDo }) => {
 	const [value, setValue] = useState("");
@@ -55,7 +56,7 @@ const TaskForm = ({ addToDo }) => {
 	};
 
 	return (
-		<div className="new-task">
+		<div className={stl.newTask}>
 			<h2>Criar tarefa</h2>
 
 			<form onSubmit={handleSubmit}>
@@ -70,12 +71,12 @@ const TaskForm = ({ addToDo }) => {
 					<option value="Estudos">Estudos</option>
 				</select>
 
-				<div className="create-div">
+				<div className={stl.createDiv}>
 					{isCreatingCategory && (
 						<input className={validationErrors.newCategory ? "is-invalid" : ""} id="newCategory" type="text" placeholder="Digite o título da nova categoria"
 							value={newCategory} onChange={(e) => setNewCategory(e.target.value)} />
 					)}
-					<button className="create-btn" type="submit">Criar tarefa</button>
+					<button className={stl.createBtn} type="submit">Criar tarefa</button>
 				</div>
 			</form>
 		</div>

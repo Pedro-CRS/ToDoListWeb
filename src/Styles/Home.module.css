@@ -2,7 +2,7 @@
 	display: none !important;
 }
 
-.todo-container {
+.todoContainer {
 	max-width: 70vw;
 	height: 100%;
 	display: flex;
@@ -10,7 +10,7 @@
 	font-family: Arial, sans-serif;
 }
 
-.main-content {
+.mainContent {
 	height: 100%;
 	flex: 1;
 	display: flex;
@@ -36,12 +36,12 @@ header h1 {
 	font-size: 1.5rem;
 }
 
-.filter-buttons {
+.filterButtons {
 	display: flex;
 	gap: 1rem;
 }
 
-.filter-btn {
+.filterBtn {
 	border: none;
 	margin: 0 !important;
 	padding: 0.5rem 1rem;
@@ -51,13 +51,13 @@ header h1 {
 	transition: background-color 0.3s;
 }
 
-.filter-btn:hover,
-.filter-btn.active {
+.filterBtn:hover,
+.filterBtn.active {
 	background-color: #5c5cff;
 	color: #fff;
 }
 
-.tasks-list {
+.tasksList {
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -65,7 +65,7 @@ header h1 {
 	margin: 1rem 0;
 }
 
-.task-item {
+.taskItem {
 	height: 60px;
 	display: flex;
 	align-items: center;
@@ -75,12 +75,12 @@ header h1 {
 	margin: 1rem 0;
 }
 
-.done .task-title {
+.done .taskTitle {
 	text-decoration: line-through;
 	color: #888888;
 }
 
-.task-checkbox {
+.taskCheckbox {
 	min-width: 40px;
 	max-width: 40px;
 	height: 100%;
@@ -91,7 +91,7 @@ header h1 {
 	border-right: 1px solid #555555;
 }
 
-.rounded-checkbox {
+.roundedCheckbox {
 	min-width: 2rem;
 	min-height: 2rem;
 	max-width: 2rem;
@@ -106,13 +106,13 @@ header h1 {
 	padding: 0;
 }
 
-.rounded-checkbox:checked {
+.roundedCheckbox:checked {
 	appearance: auto;
 	clip-path: circle(50% at 50% 50%);
 	background-color: blue;
 }
 
-.task-details {
+.taskDetails {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -123,7 +123,7 @@ header h1 {
 	cursor: default;
 }
 
-.task-title {
+.taskTitle {
 	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
@@ -131,13 +131,13 @@ header h1 {
 	font-size: 1rem;
 }
 
-.item-category {
+.itemCategory {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.item-category input[type="checkbox"] {
+.itemCategory input[type="checkbox"] {
 	max-width: 1rem !important;
 	max-height: 1rem !important;
 	min-width: 1rem !important;
@@ -146,14 +146,14 @@ header h1 {
 	margin: 0;
 }
 
-.task-category {
+.taskCategory {
 	width: 100%;
 	font-size: 0.8rem;
 	color: #888888;
 	margin-left: 0.5rem;
 }
 
-.task-actions {
+.taskActions {
 	min-width: 60px;
 	max-width: 60px;
 	height: 100%;
@@ -165,8 +165,8 @@ header h1 {
 	border-left: 1px solid #555555;
 }
 
-.edit-btn,
-.delete-btn {
+.editBtn,
+.deleteBtn {
 	margin: 0;
 	background: none;
 	border: none;
@@ -175,23 +175,23 @@ header h1 {
 	color: #888;
 }
 
-.edit-btn:hover,
-.delete-btn:hover {
+.editBtn:hover,
+.deleteBtn:hover {
 	color: #000;
 }
 
-.create-div {
+.createDiv {
 	display: flex;
 	justify-content: end;
 	gap: 2rem;
 }
 
-.create-div input,
-.create-div button {
+.createDiv input,
+.createDiv button {
 	margin: 5px 0 !important;
 }
 
-.create-btn {
+.createBtn {
 	min-width: 130px;
 	height: 30px !important;
 	border: none;
@@ -203,7 +203,7 @@ header h1 {
 	transition: background-color 0.3s;
 }
 
-.create-btn:hover {
+.createBtn:hover {
 	background-color: #5c5cff;
 	color: #ffffff;
 }
@@ -219,11 +219,11 @@ select {
 	border-radius: 7px;
 }
 
-.is-invalid {
+.isInvalid {
 	border-color: red;
 }
 
-.add-task-footer {
+.addTaskFooter {
 	width: 100%;
 	min-height: 160px;
 	max-height: 160px;
@@ -233,29 +233,9 @@ select {
 	gap: 1rem;
 }
 
-.new-task {
+.newTask {
 	padding: 0.5rem 0 0;
 	width: 100%;
-}
-
-.disabled {
-	pointer-events: none;
-	opacity: 0.3;
-}
-
-.noSelect {
-	-webkit-touch-callout: none;
-	/* ↑ iOS Safari */
-	-webkit-user-select: none;
-	/* ↑ Safari */
-	-khtml-user-select: none;
-	/* ↑ Konqueror HTML */
-	-moz-user-select: none;
-	/* ↑ Old versions of Firefox */
-	-ms-user-select: none;
-	/* ↑ Internet Explorer/Edge */
-	user-select: none;
-	/* ↑ Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 button {
