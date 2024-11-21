@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import stl from "../../Styles/Login.module.css";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -25,29 +25,29 @@ const Login = () => {
 	}
 
 	return (
-		<div className="page">
-			<form className="login-box">
-				<h1 className="title">Welcome to CheckIt</h1>
-				<h2 className="subtitle">Please, insert your informations to access your tasks.</h2>
+		<div className={stl.page}>
+			<form className={stl.loginBox}>
+				<h1 className={stl.title}>Bem vindo ao CheckIt</h1>
+				<h2 className={stl.subtitle}>Por favor, insira suas credenciais para acessar suas tarefas.</h2>
 
-				<div className="w-100 padding-x">
-					<h2 className="field-name">Email</h2>
-					<input className="input-field" value={email} id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Insert your email" />
+				<div className={`w-100 ${stl.paddingX}`}>
+					<h2 className={stl.fieldName}>Email</h2>
+					<input value={email} id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Insira seu email" />
 				</div>
 
-				<div className="w-100 padding-x">
-					<h2 className="field-name">Password</h2>
-					<input className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Insert your password" type="password" />
+				<div className={`w-100 ${stl.paddingX}`}>
+					<h2 className={stl.fieldName}>Senha</h2>
+					<input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Insira sua senha" type="password" />
 				</div>
 
-				<div className="w-100 keep-signed">
-					<input id="remeberChk" className="checkbox" type="checkbox" />
-					<label htmlFor="remeberChk" className="subtitle">Remember me</label>
+				<div className={`w-100 ${stl.keepSigned}`}>
+					<input id="remeberChk" className={stl.checkbox} type="checkbox" />
+					<label htmlFor="remeberChk" className={stl.subtitle}>Continuar conectado</label>
 				</div>
 
-				<button className="sign-in" type="button" onClick={handleLoginRedirect}>Sign In</button>
+				<button className={stl.signIn} type="button" onClick={handleLoginRedirect}>Entrar</button>
 
-				<h2 className="subtitle">Don't have an account? <a onClick={handleSignUpRedirect}>Sign Up</a></h2>
+				<h2 className={stl.subtitle}>Ainda não tem cadastro? <a onClick={handleSignUpRedirect}>Registre-se</a></h2>
 			</form>
 		</div>
 	);
