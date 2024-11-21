@@ -7,7 +7,7 @@ import stl from "../../Styles/Home.module.css";
 const ToDo = ({ todo, onComplete, onRemove, onEdit }) => {
 	return (
 		<div key={todo.id} className={`${stl.taskItem} ${todo.isCompleted ? stl.done : ""}`}>
-			<div className={stl.taskCheckbox}>
+			<div className={stl.taskCheckbox} style={{ backgroundColor: todo.color }}>
 				<CompleteToDo todo={todo} onChange={onComplete} />
 			</div>
 
@@ -15,8 +15,8 @@ const ToDo = ({ todo, onComplete, onRemove, onEdit }) => {
 				<label className={stl.taskTitle}>{todo.text}</label>
 
 				<div className={stl.itemCategory}>
-					<input className={stl.roundedCheckbox} type="checkbox" disabled
-						style={{ backgroundColor: todo.color, borderColor: todo.color, }} />
+					{/* <input className={stl.roundedCheckbox} type="checkbox" disabled
+						style={{ backgroundColor: todo.color, borderColor: todo.color, }} /> */}
 					<span className={stl.taskCategory}>{todo.category}</span>
 				</div>
 			</div>

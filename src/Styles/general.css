@@ -1,3 +1,28 @@
+* {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	border: none;
+	outline: none;
+	scroll-behavior: smooth;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 15px;
+}
+
+html,
+body,
+#root {
+	height: 100%;
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+.w-100 {
+	width: 100%;
+}
+
 .is-invalid {
 	border-color: red;
 }
@@ -20,4 +45,15 @@
 	/* ↑ Internet Explorer/Edge */
 	user-select: none;
 	/* ↑ Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+input,
+select {
+	width: 100%;
+	min-height: 30px;
+	max-height: 30px;
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 1px solid #555555;
+	border-radius: 7px;
 }

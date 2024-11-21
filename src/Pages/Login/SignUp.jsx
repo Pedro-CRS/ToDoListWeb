@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import stl from "../../Styles/Login.module.css";
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -40,40 +40,36 @@ const Register = () => {
 	}
 
 	return (
-		<div className="page">
-			<form>
-				<div className="login-box">
-					<h1 className="title">Create Your Account</h1>
-					<h2 className="subtitle">Please, fill in the fields below to register and start managing your tasks.</h2>
+		<div className={stl.page}>
+			<form className={stl.loginBox}>
+				<h1 className={stl.title}>Crie sua conta</h1>
+				<h2 className={stl.subtitle}>Por favor, preencha os campos abaixo para registrar-se e comece gerenciar suas tarefas.</h2>
 
-					<div className="w-100 padding-x">
-						<h2 className="field-name">Name</h2>
-						<input className="input-field" value={name} onChange={(e) => setName(e.target.value)} placeholder="Insert your name" />
-					</div>
-
-					<div className="w-100 padding-x">
-						<h2 className="field-name">Email</h2>
-						<input className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Insert your email" />
-					</div>
-
-					<div className="w-100 padding-x">
-						<h2 className="field-name">Password</h2>
-						<input className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Create a password" type="password" />
-					</div>
-
-					<div className="w-100 padding-x">
-						<h2 className="field-name">Confirm Password</h2>
-						<input className="input-field" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm your password" type="password" />
-					</div>
-
-					<button className="sign-in" type="button" onClick={handleRegisterUser}>
-						Sign Up
-					</button>
-
-					<h2 className="subtitle">
-						Already have an account? <a onClick={handleSignInRedirect}>Sign In</a>
-					</h2>
+				<div className={`w-100 ${stl.paddingX}`}>
+					<h2 className={stl.fieldName}>Nome</h2>
+					<input value={name} onChange={(e) => setName(e.target.value)} placeholder="Insira seu nome" />
 				</div>
+
+				<div className={`w-100 ${stl.paddingX}`}>
+					<h2 className={stl.fieldName}>Email</h2>
+					<input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Insira seu email" />
+				</div>
+
+				<div className={`w-100 ${stl.paddingX}`}>
+					<h2 className={stl.fieldName}>Senha</h2>
+					<input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Insira a Senha" type="password" />
+				</div>
+
+				<div className={`w-100 ${stl.paddingX}`}>
+					<h2 className={stl.fieldName}>Confirmar Senha</h2>
+					<input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirmar senha" type="password" />
+				</div>
+
+				<button className={stl.signIn} type="button" onClick={handleRegisterUser}>
+					Cadastrar-se
+				</button>
+
+				<h2 className={stl.subtitle}>Já tenha uma conta? <a onClick={handleSignInRedirect}>Entrar</a></h2>
 			</form>
 		</div>
 	);

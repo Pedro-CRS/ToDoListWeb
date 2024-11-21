@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import "./Modal.css";
+import stl from "../../Styles/Modal.module.css";
 
 const ToDoModal = ({ task, onSave, onClose }) => {
 	const [text, setText] = useState("");
@@ -21,8 +21,8 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 	};
 
 	return (
-		<div className="modal-overlay">
-			<div className="modal">
+		<div className={stl.modalOverlay}>
+			<div className={stl.modal}>
 				<h3>Editar Tarefa</h3>
 
 				<form>
@@ -40,8 +40,8 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 						</select>
 					</div>
 
-					<button className="btnSave" type="button" onClick={handleSave}>Salvar</button>
-					<button className="btnCancel" type="button" onClick={onClose}>Cancelar</button>
+					<button className={stl.btnSave} type="button" onClick={handleSave}>Salvar</button>
+					<button className={stl.btnCancel} type="button" onClick={onClose}>Cancelar</button>
 				</form>
 			</div>
 		</div>
