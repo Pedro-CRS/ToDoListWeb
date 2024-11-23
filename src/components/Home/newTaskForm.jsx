@@ -12,7 +12,7 @@ const TaskForm = ({ addToDo }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		var cancelSave = false;
+		let cancelSave = false;
 
 		if (value.trim() === "") {
 			setValidationErrors((prev) => ({ ...prev, task: true }));
