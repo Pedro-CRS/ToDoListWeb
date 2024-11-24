@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import stl from "../../Styles/Home.module.css";
 import stlModal from "../../Styles/Modal.module.css";
-import { loadCategories, createCategory } from "../../api/api";
+import { loadCategories, createCategory, createTask } from "../../api/api";
 
 const TaskForm = ({ addToDo, onSave, onClose }) => {
-	const [categoryTitle, setcategoryTitle] = useState("");
+	const [taskTitle, setTaskTitle] = useState("");
 	const [category, setCategory] = useState("");
 	const [categories, setCategories] = useState([]);
 	const [newCategory, setNewCategory] = useState("");
@@ -31,7 +31,7 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 		let cancelSave = false;
 		setValidationErrors((prev) => ({ ...prev, task: false, category: false, newCategory: false }));
 
-		if (categoryTitle.trim() === "") {
+		if (taskTitle.trim() === "") {
 			setValidationErrors((prev) => ({ ...prev, task: true }));
 			cancelSave = true;
 		}
@@ -47,12 +47,31 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 		}
 
 		if (!cancelSave) {
-			if (newCategory) {
+			if (category === "-1" && newCategory) {
 				try {
 					const data = await createCategory({ title: newCategory });
+					const createdCategory = data.data;
+
 					setCategories((prev) => [...prev, data.data]);
+
+					await createTask({ userId: 1, title: taskTitle, categoryId: parseInt(createdCategory.id) });
+
+					if (addToDo)
+						addToDo({ closeModal: true });
+
 				} catch (error) {
-					console.error("Erro ao criar categoria", error);
+					alert("Erro ao criar categoria e/ou tarefa.", error);
+				}
+			}
+			else {
+				try {
+					await createTask({ userId: 1, title: taskTitle, categoryId: parseInt(category) });
+
+					if (addToDo)
+						addToDo({ closeModal: true });
+
+				} catch (error) {
+					alert("Erro ao criar tarefa.", error);
 				}
 			}
 		}
@@ -76,7 +95,7 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 					<h2>Criar tarefa</h2>
 
 					<form onSubmit={handleSubmit}>
-						<input id="inputCreateTask" type="text" placeholder="Digite o título da nova tarefa" value={categoryTitle} onChange={(e) => setcategoryTitle(e.target.value)}
+						<input id="inputCreateTask" type="text" placeholder="Digite o título da nova tarefa" value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)}
 							className={validationErrors.task ? "is-invalid" : ""} />
 
 						<select id="selectCategory" value={category} onChange={(e) => categoryOnChange(e.target.value)} className={validationErrors.category ? "is-invalid" : ""}>

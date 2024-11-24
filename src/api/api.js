@@ -26,4 +26,18 @@ export const createCategory = async (data) => {
 	return api.post("/categories", data);
 };
 
+export const loadTasks = async () => {
+	try {
+		const response = await api.get("/tasks");
+		return response.data;
+	} catch (error) {
+		console.error("Erro ao carregar suas tarefas:", error);
+		throw error;
+	}
+};
+
+export const createTask = async (data) => {
+	return api.post("/tasks", data);
+};
+
 export default api;
