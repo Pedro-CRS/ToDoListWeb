@@ -1,79 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import stl from "../../Styles/Home.module.css";
 import ToDo from "../../components/Home/ToDo";
 import TaskForm from "../../components/Home/newTaskForm";
 import FiltersBtns from "../../components/Home/btnsFilters";
 import Modal from "../../components/Home/editTaskModal";
+import { loadTasks } from "../../api/api";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const TodoPage = () => {
-	const [todos, setTodos] = useState([
-		{
-			id: 1,
-			text: "Criar funcionalidade X no sistema",
-			category: "Trabalho",
-			isCompleted: false,
-			color: "burlywood"
-		},
-		{
-			id: 2,
-			text: "Ir para academia",
-			category: "Pessoal",
-			isCompleted: false,
-			color: "green"
-		},
-		{
-			id: 3,
-			text: "Estudar React",
-			category: "Estudo",
-			isCompleted: false,
-			color: "pink"
-		},
-		{
-			id: 4,
-			text: "Criar funcionalidade X no sistema",
-			category: "Trabalho",
-			isCompleted: false,
-			color: "burlywood"
-		},
-		{
-			id: 5,
-			text: "Ir para academia",
-			category: "Pessoal",
-			isCompleted: false,
-			color: "green"
-		},
-		{
-			id: 6,
-			text: "Estudar React",
-			category: "Estudo",
-			isCompleted: false,
-			color: "pink"
-		},
-		{
-			id: 7,
-			text: "Criar funcionalidade X no sistema",
-			category: "Trabalho",
-			isCompleted: false,
-			color: "burlywood"
-		},
-		{
-			id: 8,
-			text: "Ir para academia",
-			category: "Pessoal",
-			isCompleted: false,
-			color: "green"
-		},
-		{
-			id: 9,
-			text: "Estudar React",
-			category: "Estudo",
-			isCompleted: false,
-			color: "pink"
-		},
-	]);
+	const [todos, setTodos] = useState([]);
+
+	const fetchTasks = async (closeModal) => {
+		try {
+			const data = await loadTasks();
+			setTodos(data);
+
+			if (closeModal)
+				handleCloseModal();
+
+		} catch (error) {
+			console.error("Erro ao carregar tarefas.", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchTasks();
+	}, []);
 
 	const [filter, setFilter] = useState("All");
 
@@ -154,7 +108,7 @@ const TodoPage = () => {
 					<FiltersBtns setFilter={setFilter} />
 				</header>
 
-				<div style={{minHeight: "30px", margin: "1rem 0 0 0", textAlign: "end" }}>
+				<div style={{ minHeight: "30px", margin: "1rem 0 0 0", textAlign: "end" }}>
 					<button className={stl.createBtn} type="button" onClick={handleNewTaskClick}>Criar tarefa</button>
 				</div>
 
@@ -170,7 +124,7 @@ const TodoPage = () => {
 
 				{isModalOpen === "edit" && currentTask && (<Modal task={currentTask} onSave={handleSaveEdit} onClose={handleCloseModal} />)}
 
-				{isModalOpen === "new" && (<TaskForm addToDo={addToDo} onClose={handleCloseModal} />)}
+				{isModalOpen === "new" && (<TaskForm addToDo={(param) => fetchTasks(param)} onClose={handleCloseModal} />)}
 			</main>
 		</div>
 	);
