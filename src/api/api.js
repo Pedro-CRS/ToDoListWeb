@@ -12,4 +12,18 @@ export const loginUser = async (data) => {
 	return api.post("/auth/login", data);
 };
 
+export const loadCategories = async () => {
+	try {
+		const response = await api.get("/categories");
+		return response.data;
+	} catch (error) {
+		console.error("Erro ao carregar categorias:", error);
+		throw error;
+	}
+};
+
+export const createCategory = async (data) => {
+	return api.post("/categories", data);
+};
+
 export default api;

@@ -123,11 +123,17 @@ const TodoPage = () => {
 	}
 
 	const [currentTask, setCurrentTask] = useState(null);
+	const [newTask, setNewTask] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const handleEditClick = (task) => {
 		setCurrentTask(task);
-		setIsModalOpen(true);
+		setIsModalOpen("edit");
+	};
+
+	const handleNewTaskClick = (task) => {
+		setNewTask(task);
+		setIsModalOpen("new");
 	};
 
 	const handleSaveEdit = (updatedTask) => {
@@ -148,6 +154,10 @@ const TodoPage = () => {
 					<FiltersBtns setFilter={setFilter} />
 				</header>
 
+				<div style={{minHeight: "30px", margin: "1rem 0 0 0", textAlign: "end" }}>
+					<button className={stl.createBtn} type="button" onClick={handleNewTaskClick}>Criar tarefa</button>
+				</div>
+
 				<div className={stl.tasksList}>
 					{
 						todos.filter((todo) =>
@@ -158,13 +168,9 @@ const TodoPage = () => {
 					}
 				</div>
 
-				<footer className={stl.addTaskFooter}>
-					<TaskForm addToDo={addToDo} />
-				</footer>
+				{isModalOpen === "edit" && currentTask && (<Modal task={currentTask} onSave={handleSaveEdit} onClose={handleCloseModal} />)}
 
-				{isModalOpen && currentTask && (
-					<Modal task={currentTask} onSave={handleSaveEdit} onClose={handleCloseModal} />
-				)}
+				{isModalOpen === "new" && (<TaskForm addToDo={addToDo} onClose={handleCloseModal} />)}
 			</main>
 		</div>
 	);

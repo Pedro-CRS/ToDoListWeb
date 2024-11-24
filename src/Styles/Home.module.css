@@ -54,20 +54,23 @@ header h1 {
 
 .tasksList {
 	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
 	overflow-x: hidden;
 	overflow-y: auto;
 	padding: 0 0.7rem 0 0;
 	margin: 1rem 0;
+	gap: 1rem;
 }
 
 .taskItem {
+	width: 100%;
 	height: 60px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: 1px solid #555555;
 	border-radius: 12px;
-	margin: 1rem 0;
 }
 
 .done .taskTitle {
@@ -233,19 +236,4 @@ button {
 
 .isLastOfList {
 	margin-bottom: 0 !important;
-}
-
-::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(193, 193, 193, 255);
-	border-radius: 10px;
-}
-
-::-webkit-scrollbar {
-	width: 12px;
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(193, 193, 193, 255);
-	background-color: rgba(193, 193, 193, 255);
 }
