@@ -44,4 +44,12 @@ export const deleteTask = async (id) => {
 	return api.delete(`/tasks/${id}`);
 };
 
+export const getTaskById = async (id) => {
+	return api.get(`/tasks/${id}`);
+};
+
+export const updateTask = async (id, data) => {
+	return api.put(`/tasks/${id}`, data);
+};
+
 export default api;

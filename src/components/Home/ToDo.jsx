@@ -22,7 +22,7 @@ const ToDo = ({ todo, onComplete, onRemove, onEdit }) => {
 			</div>
 
 			<div className={`${stl.taskActions} ${todo.isCompleted ? "disabled noSelect" : ""} `}>
-				<EditToDo todoId={todo.id} onClick={onEdit} />
+				<EditToDo todo={todo} onClick={onEdit} />
 
 				<DeleteToDo todoId={todo.id} onClick={onRemove} />
 			</div>
