@@ -78,7 +78,7 @@ const TodoPage = () => {
 	const [newTask, setNewTask] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const handleEditClick = (task) => {
+	const handleEditTask = (task) => {
 		setCurrentTask(task);
 		setIsModalOpen("edit");
 	};
@@ -86,11 +86,6 @@ const TodoPage = () => {
 	const handleNewTaskClick = (task) => {
 		setNewTask(task);
 		setIsModalOpen("new");
-	};
-
-	const handleSaveEdit = (updatedTask) => {
-		setTodos(todos.map((todo) => (todo.id === updatedTask.id ? updatedTask : todo)));
-		setIsModalOpen(false);
 	};
 
 	const handleCloseModal = () => {
@@ -115,12 +110,12 @@ const TodoPage = () => {
 						todos.filter((todo) =>
 							filter === "All" ? true : filter === "Done" ? todo.isCompleted : !todo.isCompleted
 						).map((todo) => (
-							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={handleDeleteTask} onEdit={handleEditClick} />
+							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={handleDeleteTask} onEdit={handleEditTask} />
 						))
 					}
 				</div>
 
-				{isModalOpen === "edit" && currentTask && (<Modal task={currentTask} onSave={handleSaveEdit} onClose={handleCloseModal} />)}
+				{isModalOpen === "edit" && currentTask && (<Modal task={currentTask} onSave={fetchTasks} onClose={handleCloseModal} />)}
 
 				{isModalOpen === "new" && (<TaskForm addToDo={fetchTasks} onClose={handleCloseModal} />)}
 			</main>
