@@ -57,7 +57,7 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 					await createTask({ userId: 1, title: taskTitle, categoryId: parseInt(createdCategory.id) });
 
 					if (addToDo)
-						addToDo({ closeModal: true });
+						addToDo();
 
 				} catch (error) {
 					alert("Erro ao criar categoria e/ou tarefa.", error);
@@ -68,7 +68,7 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 					await createTask({ userId: 1, title: taskTitle, categoryId: parseInt(category) });
 
 					if (addToDo)
-						addToDo({ closeModal: true });
+						addToDo();
 
 				} catch (error) {
 					alert("Erro ao criar tarefa.", error);
