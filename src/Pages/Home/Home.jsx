@@ -4,7 +4,7 @@ import ToDo from "../../components/Home/ToDo";
 import TaskForm from "../../components/Home/newTaskForm";
 import FiltersBtns from "../../components/Home/btnsFilters";
 import Modal from "../../components/Home/editTaskModal";
-import { loadTasks } from "../../api/api";
+import { loadTasks, deleteTask } from "../../api/api";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -12,7 +12,7 @@ import withReactContent from "sweetalert2-react-content";
 const TodoPage = () => {
 	const [todos, setTodos] = useState([]);
 
-	const fetchTasks = async (closeModal) => {
+	const fetchTasks = async (closeModal = true) => {
 		try {
 			const data = await loadTasks();
 			setTodos(data);
@@ -26,25 +26,10 @@ const TodoPage = () => {
 	};
 
 	useEffect(() => {
-		fetchTasks();
+		fetchTasks(false);
 	}, []);
 
 	const [filter, setFilter] = useState("All");
-
-	const addToDo = (text, category, createdNow) => {
-		const newToDos = [
-			// ...todos,
-			{
-				id: todos.length + 1,
-				text: text,
-				category: category,
-				isCompleted: false,
-				createdNow: createdNow
-			}, ...todos
-		];
-
-		setTodos(newToDos);
-	}
 
 	const completeToDo = (id) => {
 		const newToDos = [...todos];
@@ -53,7 +38,7 @@ const TodoPage = () => {
 		setTodos(newToDos);
 	}
 
-	const removeToDo = (id) => {
+	const handleDeleteTask = (id) => {
 		withReactContent(Swal).fire({
 			heightAuto: false,
 			title: "Deseja realmente deletar essa tarefa?",
@@ -65,13 +50,26 @@ const TodoPage = () => {
 			cancelButtonText: "Cancelar",
 			allowOutsideClick: false,
 			allowEscapeKey: false,
-			// reverseButtons: true,
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
-				const newToDos = [...todos];
-				const filteredToDos = newToDos.filter((todo) => todo.id !== id ? todo : null);
+				try {
+					await deleteTask(id);
+					fetchTasks();
 
-				setTodos(filteredToDos);
+					Swal.fire({
+						title: "Tarefa excluída com sucesso!",
+						icon: "success",
+						heightAuto: false,
+					});
+
+				} catch (error) {
+					Swal.fire({
+						title: "Erro ao excluir a tarefa!",
+						text: error.response?.data?.error || "Algo deu errado.",
+						icon: "error",
+						heightAuto: false,
+					});
+				}
 			}
 		});
 	}
@@ -117,14 +115,14 @@ const TodoPage = () => {
 						todos.filter((todo) =>
 							filter === "All" ? true : filter === "Done" ? todo.isCompleted : !todo.isCompleted
 						).map((todo) => (
-							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={removeToDo} onEdit={handleEditClick} />
+							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={handleDeleteTask} onEdit={handleEditClick} />
 						))
 					}
 				</div>
 
 				{isModalOpen === "edit" && currentTask && (<Modal task={currentTask} onSave={handleSaveEdit} onClose={handleCloseModal} />)}
 
-				{isModalOpen === "new" && (<TaskForm addToDo={(param) => fetchTasks(param)} onClose={handleCloseModal} />)}
+				{isModalOpen === "new" && (<TaskForm addToDo={fetchTasks} onClose={handleCloseModal} />)}
 			</main>
 		</div>
 	);

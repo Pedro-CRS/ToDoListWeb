@@ -40,4 +40,8 @@ export const createTask = async (data) => {
 	return api.post("/tasks", data);
 };
 
+export const deleteTask = async (id) => {
+	return api.delete(`/tasks/${id}`);
+};
+
 export default api;
