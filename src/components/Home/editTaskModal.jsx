@@ -124,8 +124,8 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 						)}
 					</div>
 
-					<button className={stl.btnSave} type="button" onClick={handleSaveEdit}>Salvar</button>
-					<button className={stl.btnCancel} type="button" onClick={onClose}>Cancelar</button>
+					<button className={"btnSave"} type="button" onClick={handleSaveEdit}>Salvar</button>
+					<button className={"btnCancel"} type="button" onClick={onClose}>Cancelar</button>
 				</form>
 			</div>
 		</div>

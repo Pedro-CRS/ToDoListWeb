@@ -114,8 +114,8 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 						)}
 
 						<div>
-							<button className={stlModal.btnSave} type="submit" onClick={onSave}>Criar tarefa</button>
-							<button className={stlModal.btnCancel} type="button" onClick={onClose}>Cancelar</button>
+							<button className={"btnSave"} type="submit" onClick={onSave}>Criar tarefa</button>
+							<button className={"btnCancel"} type="button" onClick={onClose}>Cancelar</button>
 						</div>
 					</form>
 				</div>

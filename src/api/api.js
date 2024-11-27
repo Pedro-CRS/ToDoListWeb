@@ -74,4 +74,8 @@ export const updateTask = async (id, data) => {
 	return api.put(`/tasks/${id}`, data);
 };
 
+export const updateTaskCompletion = async (id, isCompleted) => {
+    return api.patch(`/tasks/${id}/completed`, { isCompleted });
+};
+
 export default api;
