@@ -41,19 +41,25 @@ header h1 {
 	margin: 0 !important;
 	padding: 0.5rem 1rem;
 	border-radius: 5px;
+	opacity: 0.6;
+	color: #ffffff;
 	background-color: #a1a1a1;
 	cursor: pointer;
 	transition: background-color 0.3s;
 }
 
-.filterBtn:hover,
+.filterBtn:hover {
+	opacity: 1;
+}
+
 .filterBtn.active {
 	background-color: #5c5cff;
-	color: #fff;
+	opacity: 1;
 }
 
 .tasksList {
-	height: 100%;
+	height: auto;
+	max-height: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	overflow-x: hidden;
@@ -171,12 +177,12 @@ header h1 {
 	border: none;
 	cursor: pointer;
 	font-size: 1rem;
-	color: #888;
+	color: #888888;
 }
 
 .editBtn:hover,
 .deleteBtn:hover {
-	color: #000;
+	color: #000000;
 }
 
 .createDiv {
@@ -197,14 +203,16 @@ header h1 {
 	margin: 0;
 	padding: 0.5rem 1rem;
 	border-radius: 7px;
-	background-color: #5c5cff;
+	opacity: 0.6;
+	color: #ffffff;
+	font-weight: bold;
+	background: linear-gradient(to right, #4CAF50, #f44336);
 	cursor: pointer;
 	transition: background-color 0.3s;
 }
 
 .createBtn:hover {
-	background-color: #5c5cff;
-	color: #ffffff;
+	opacity: 1;
 }
 
 .isInvalid {

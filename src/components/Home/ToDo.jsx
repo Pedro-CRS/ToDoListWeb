@@ -15,8 +15,6 @@ const ToDo = ({ todo, onComplete, onRemove, onEdit }) => {
 				<label className={stl.taskTitle}>{todo.title}</label>
 
 				<div className={stl.itemCategory}>
-					{/* <input className={stl.roundedCheckbox} type="checkbox" disabled
-						style={{ backgroundColor: todo.color, borderColor: todo.color, }} /> */}
 					<span className={stl.taskCategory}>{todo.Category.title || ""}</span>
 				</div>
 			</div>

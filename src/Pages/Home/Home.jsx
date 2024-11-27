@@ -4,7 +4,7 @@ import ToDo from "../../components/Home/ToDo";
 import TaskForm from "../../components/Home/newTaskForm";
 import FiltersBtns from "../../components/Home/btnsFilters";
 import Modal from "../../components/Home/editTaskModal";
-import { loadTasks, deleteTask } from "../../api/api";
+import { loadTasks, deleteTask, updateTaskCompletion } from "../../api/api";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -31,11 +31,17 @@ const TodoPage = () => {
 
 	const [filter, setFilter] = useState("All");
 
-	const completeToDo = (id) => {
-		const newToDos = [...todos];
-		newToDos.map((todo) => todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo);
+	const completeToDo = async (id, completedStatus) => {
+		try {
+			await updateTaskCompletion(id, completedStatus);
 
-		setTodos(newToDos);
+			setTodos((prevTasks) =>
+				prevTasks.map((task) =>
+					task.id === id ? { ...task, isCompleted: completedStatus } : task
+				)
+			);
+
+		} catch (error) { }
 	}
 
 	const handleDeleteTask = (id) => {
@@ -50,6 +56,7 @@ const TodoPage = () => {
 			cancelButtonText: "Cancelar",
 			allowOutsideClick: false,
 			allowEscapeKey: false,
+			customClass: { confirmButton: "btnSave", cancelButton: "btnCancel" },
 		}).then(async (result) => {
 			if (result.isConfirmed) {
 				try {
@@ -75,7 +82,6 @@ const TodoPage = () => {
 	}
 
 	const [currentTask, setCurrentTask] = useState(null);
-	const [newTask, setNewTask] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const handleEditTask = (task) => {
@@ -84,7 +90,6 @@ const TodoPage = () => {
 	};
 
 	const handleNewTaskClick = (task) => {
-		setNewTask(task);
 		setIsModalOpen("new");
 	};
 
@@ -98,7 +103,7 @@ const TodoPage = () => {
 				<header>
 					<h1>Todas as suas tarefas</h1>
 
-					<FiltersBtns setFilter={setFilter} />
+					<FiltersBtns setedFilter={filter} setFilter={setFilter} />
 				</header>
 
 				<div style={{ minHeight: "30px", margin: "1rem 0 0 0", textAlign: "end" }}>
@@ -110,7 +115,7 @@ const TodoPage = () => {
 						todos.filter((todo) =>
 							filter === "All" ? true : filter === "Done" ? todo.isCompleted : !todo.isCompleted
 						).map((todo) => (
-							<ToDo key={todo.id} todo={todo} onComplete={completeToDo} onRemove={handleDeleteTask} onEdit={handleEditTask} />
+							<ToDo key={todo.id} todo={todo} onComplete={(e) => completeToDo(todo.id, e.target.checked)} onRemove={handleDeleteTask} onEdit={handleEditTask} />
 						))
 					}
 				</div>

@@ -1,8 +1,8 @@
 import { React, useState } from "react";
 import stl from "../../Styles/Home.module.css";
 
-const HeaderBtnsActions = ({ setFilter }) => {
-	const [activeFilter, setActiveFilter] = useState("All");
+const HeaderBtnsActions = ({ setedFilter, setFilter }) => {
+	const [activeFilter, setActiveFilter] = useState(setedFilter);
 
 	const handleClick = (filter) => {
 		setFilter(filter);
