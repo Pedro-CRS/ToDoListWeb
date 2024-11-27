@@ -42,10 +42,12 @@ const Login = () => {
 			const userData = { email: email, password: password };
 
 			try {
-				await loginUser(userData);
+				var dataLogin = await loginUser(userData);
 
 				if (isChecked)
-					localStorage.setItem("authToken", true);
+					localStorage.setItem("authToken", dataLogin.data.token);
+				else
+					sessionStorage.setItem("authToken", dataLogin.data.token);
 
 				navigate("/");
 			} catch (error) {
