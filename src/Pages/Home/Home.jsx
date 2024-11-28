@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import stl from "../../Styles/Home.module.css";
 import ToDo from "../../components/Home/ToDo";
 import TaskForm from "../../components/Home/newTaskForm";
 import FiltersBtns from "../../components/Home/btnsFilters";
 import Modal from "../../components/Home/editTaskModal";
 import { loadTasks, deleteTask, updateTaskCompletion } from "../../api/api";
+import UserButton from "../../components/UserButton";
+import { AuthContext } from "../../Pages/AuthContext";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const TodoPage = () => {
+	const { user, logout } = useContext(AuthContext);
 	const [todos, setTodos] = useState([]);
 
 	const fetchTasks = async (closeModal = true) => {
@@ -97,6 +100,9 @@ const TodoPage = () => {
 		setIsModalOpen(false);
 	};
 
+	if (!user)
+		return <p>Ocorreu algum error ao buscar seus dados...</p>;
+
 	return (
 		<div className={stl.todoContainer}>
 			<main className={stl.mainContent}>
@@ -104,6 +110,8 @@ const TodoPage = () => {
 					<h1>Todas as suas tarefas</h1>
 
 					<FiltersBtns setedFilter={filter} setFilter={setFilter} />
+
+					<UserButton user={user} />
 				</header>
 
 				<div style={{ minHeight: "30px", margin: "1rem 0 0 0", textAlign: "end" }}>

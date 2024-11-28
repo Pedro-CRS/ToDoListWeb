@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import stl from "../../Styles/Login.module.css";
 import { loginUser } from "../../api/api";
+import { AuthContext } from "../AuthContext";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 	const [isChecked, setIsChecked] = useState(false);
 	const [validationErrors, setValidationErrors] = useState({ email: false, password: false });
+	const { setUser } = useContext(AuthContext);
 
 	const handleSignUpRedirect = (event) => {
 		event.preventDefault();
@@ -45,10 +47,13 @@ const Login = () => {
 				var dataLogin = await loginUser(userData);
 
 				if (isChecked)
-					localStorage.setItem("authToken", dataLogin.data.token);
+					localStorage.setItem("authToken", dataLogin.data?.token || null);
 				else
-					sessionStorage.setItem("authToken", dataLogin.data.token);
+					sessionStorage.setItem("authToken", dataLogin.data?.token || null);
 
+				sessionStorage.setItem("userName", dataLogin.data?.userName || null);
+
+				setUser(dataLogin.data?.userName || null);
 				navigate("/");
 			} catch (error) {
 				alert(error.response.data.error);

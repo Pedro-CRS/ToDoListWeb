@@ -9,18 +9,21 @@ import RedirectIfAuthenticated from "./Routes/RedirectIfAuthenticated";
 import Login from "./Pages/Login/SignIn.jsx";
 import Register from "./Pages/Login/SignUp.jsx";
 import HomePage from "./Pages/Home/Home.jsx";
+import { AuthProvider } from "./Pages/AuthContext.jsx";
 
 const App = () => {
 	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
+		<AuthProvider>
+			<Router>
+				<Routes>
+					<Route path="/" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
 
-				<Route path="/login" element={<RedirectIfAuthenticated> <Login /> </RedirectIfAuthenticated>} />
+					<Route path="/login" element={<RedirectIfAuthenticated> <Login /> </RedirectIfAuthenticated>} />
 
-				<Route path="/register" element={<RedirectIfAuthenticated> <RegisterRoute> <Register /> </RegisterRoute> </RedirectIfAuthenticated>} />
-			</Routes>
-		</Router>
+					<Route path="/register" element={<RedirectIfAuthenticated> <RegisterRoute> <Register /> </RegisterRoute> </RedirectIfAuthenticated>} />
+				</Routes>
+			</Router>
+		</AuthProvider>
 	);
 };
 
