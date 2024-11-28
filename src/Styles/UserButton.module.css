@@ -1,0 +1,54 @@
+.dropUserContainer {
+	display: flex;
+	align-items: center;
+}
+
+.userPhoto {
+	min-width: 2rem;
+	max-width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.dropUserMenu {
+	position: absolute;
+	top: 45px;
+	right: 0;
+	width: auto;
+	max-width: 250px;
+	overflow: hidden;
+	background-color: ghostwhite;
+	border-radius: 5px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+	border: 1px solid #555555;
+	padding: 0 0;
+	z-index: 9999;
+}
+
+.dropUserItem {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	padding: 8px 12px;
+	border: none;
+	color: black;
+	background-color: inherit;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+span.dropUserName {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	cursor: default;
+}
+
+button.dropUserItem {
+	cursor: pointer;
+}
+
+button.dropUserItem:hover {
+	background-color: gainsboro;
+}
