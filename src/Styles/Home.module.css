@@ -1,5 +1,4 @@
 .todoContainer {
-	max-width: 70vw;
 	height: 100%;
 	display: flex;
 	margin: 0 auto;
@@ -7,18 +6,18 @@
 
 .mainContent {
 	height: 100%;
-	flex: 1;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: 0.5rem 1.5rem;
+	padding: 1rem 0;
 }
 
 header {
 	position: sticky;
 	top: 0;
 	left: 0;
-	min-height: 50px;
-	max-height: 50px;
+	min-height: 35px;
+	max-height: 35px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -32,9 +31,12 @@ header h1 {
 	font-size: 1.5rem;
 }
 
-.filterButtons {
+.filtersDiv {
 	display: flex;
-	gap: 1rem;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 0.7rem 0 0;
 	margin-left: auto;
 }
 
@@ -66,14 +68,15 @@ header h1 {
 	flex-wrap: wrap;
 	overflow-x: hidden;
 	overflow-y: auto;
-	padding: 0 0.7rem 0 0;
-	margin: 1rem 0;
+	padding: 0 0.5rem 0 0;
+	margin: 0.7rem 0;
 	gap: 1rem;
 }
 
 .taskItem {
 	width: 100%;
-	height: 60px;
+	min-height: 100px;
+	max-height: 150px;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
@@ -88,8 +91,8 @@ header h1 {
 }
 
 .taskCheckbox {
-	min-width: 40px;
-	max-width: 40px;
+	min-width: 50px;
+	max-width: 50px;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -129,11 +132,16 @@ header h1 {
 	padding: 0.5rem;
 	gap: 0.5rem;
 	cursor: default;
+	overflow: hidden;
 }
 
 .taskTitle {
 	width: 100%;
-	white-space: nowrap;
+	max-height: 100px;
+	display: -webkit-box;
+	-webkit-line-clamp: 6;
+	-webkit-box-orient: vertical;
+	white-space: normal;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	font-size: 1rem;
@@ -162,8 +170,8 @@ header h1 {
 }
 
 .taskActions {
-	min-width: 60px;
-	max-width: 60px;
+	min-width: 50px;
+	max-width: 50px;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -248,3 +256,108 @@ button {
 .isLastOfList {
 	margin-bottom: 0 !important;
 }
+
+.filterBox {
+	display: flex;
+	border: 1px solid #555555;
+	border-radius: 10px;
+	padding: 0.5rem;
+	background-color: rgb(211, 211, 211, 0.7);
+	gap: 1rem;
+}
+
+.filterSection {
+	justify-content: space-between;
+}
+
+.filterSection, .orderSection {
+	width: 100%;
+	display: flex;
+	gap: 0 0.5rem;
+}
+
+.filtersBtnsDiv {
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+
+.filtersBtnsDiv label {
+	height: 25px;
+	align-content: center;
+	margin: 0 0.7rem 0 0.3rem;
+	cursor: pointer;
+}
+
+.rdBtn {
+	min-width: 15px !important;
+	max-width: 15px !important;
+	min-height: 25px !important;
+	max-height: 25px !important;
+	margin: 0 !important;
+	cursor: pointer;
+}
+
+.filterSection p {
+	font-weight: bold;
+	margin: 0;
+}
+
+.selectWrapper {
+	width: 50%;
+}
+
+.selectWrapper label {
+	font-weight: bold;
+}
+
+.selectWrapper select {
+	margin: 0 !important;
+}
+
+/* Media queries */
+@media (min-width: 0px) {
+	.todoContainer {
+		width: 95vw !important;
+	}
+	
+	.filterSection {
+		flex-direction: column;
+	}
+
+	.filterBox {
+		flex-direction: column;
+	}
+}
+
+@media (min-width: 540px) {
+	.filterBox {
+		flex-direction: row;
+	}
+}
+
+@media (min-width: 992px) {
+	.todoContainer {
+		width: 90vw !important;
+	}
+}
+
+@media (min-width: 1440px) {
+	.todoContainer {
+		width: 85vw !important;
+	}
+}
+
+@media (min-width: 1920px) {
+	.todoContainer {
+		width: 80vw !important;
+	}
+}
+
+@media (min-width: 2560px) {
+	.todoContainer {
+		width: 70vw !important;
+	}
+}
+
+/* / Media queries */

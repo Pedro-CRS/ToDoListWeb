@@ -109,12 +109,12 @@ const TodoPage = () => {
 				<header>
 					<h1>Todas as suas tarefas</h1>
 
-					<FiltersBtns setedFilter={filter} setFilter={setFilter} />
-
 					<UserButton user={user} />
 				</header>
 
-				<div style={{ minHeight: "30px", margin: "1rem 0 0 0", textAlign: "end" }}>
+				<FiltersBtns setedFilter={filter} setFilter={setFilter} />
+
+				<div style={{ minHeight: "30px", margin: "0.7rem 0 0 0", textAlign: "end" }}>
 					<button className={stl.createBtn} type="button" onClick={handleNewTaskClick}>Criar tarefa</button>
 				</div>
 
