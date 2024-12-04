@@ -12,10 +12,12 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 	const [validationErrors, setValidationErrors] = useState({ task: false, category: false, newCategory: false });
 	const [isCreatingCategory, setIsCreatingCategory] = useState(false);
 
+	const userData = JSON.parse(sessionStorage.getItem("user"));
+
 	useEffect(() => {
 		const fetchCategories = async () => {
 			try {
-				const data = await loadCategories();
+				const data = await loadCategories(userData.id);
 				setCategories(data);
 			} catch (error) {
 				console.error("Erro ao carregar categorias", error);
@@ -49,7 +51,7 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 		if (!cancelSave) {
 			if (category === "-1" && newCategory) {
 				try {
-					const data = await createCategory({ title: newCategory });
+					const data = await createCategory({ title: newCategory, user_id: userData.id });
 					const createdCategory = data.data;
 
 					setCategories((prev) => [...prev, data.data]);

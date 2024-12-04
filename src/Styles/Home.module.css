@@ -87,7 +87,6 @@ header h1 {
 
 .done .taskTitle {
 	text-decoration: line-through;
-	color: #888888;
 }
 
 .taskCheckbox {
@@ -145,6 +144,7 @@ header h1 {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	font-size: 1rem;
+	color: #000000;
 }
 
 .itemCategory {
@@ -165,7 +165,7 @@ header h1 {
 .taskCategory {
 	width: 100%;
 	font-size: 1rem;
-	color: #888888;
+	color: #111111;
 	/* margin-left: 0.5rem; */
 }
 
@@ -209,7 +209,6 @@ header h1 {
 
 .createBtn {
 	min-width: 130px;
-	height: 30px !important;
 	border: none;
 	margin: 0;
 	padding: 0.5rem 1rem;
@@ -270,8 +269,8 @@ button {
 	justify-content: space-between;
 }
 
-.filterSection, .orderSection {
-	width: 100%;
+.filterSection,
+.orderSection {
 	display: flex;
 	gap: 0 0.5rem;
 }
@@ -318,9 +317,13 @@ button {
 /* Media queries */
 @media (min-width: 0px) {
 	.todoContainer {
-		width: 95vw !important;
+		width: 95% !important;
 	}
-	
+
+	.filterSection, .orderSection {
+		width: 100%;
+	}
+
 	.filterSection {
 		flex-direction: column;
 	}
@@ -330,33 +333,37 @@ button {
 	}
 }
 
-@media (min-width: 540px) {
+@media (min-width: 768px) {
 	.filterBox {
 		flex-direction: row;
+	}
+
+	.filterSection, .orderSection {
+		width: 50%;
 	}
 }
 
 @media (min-width: 992px) {
 	.todoContainer {
-		width: 90vw !important;
+		width: 90% !important;
 	}
 }
 
 @media (min-width: 1440px) {
 	.todoContainer {
-		width: 85vw !important;
+		width: 85% !important;
 	}
 }
 
 @media (min-width: 1920px) {
 	.todoContainer {
-		width: 80vw !important;
+		width: 80% !important;
 	}
 }
 
 @media (min-width: 2560px) {
 	.todoContainer {
-		width: 70vw !important;
+		width: 70% !important;
 	}
 }
 

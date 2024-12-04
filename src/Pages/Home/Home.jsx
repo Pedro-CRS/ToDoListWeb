@@ -17,7 +17,7 @@ const TodoPage = () => {
 
 	const fetchTasks = async (closeModal = true) => {
 		try {
-			const data = await loadTasks();
+			const data = await loadTasks(user.id);
 			setTodos(data);
 
 			if (closeModal)
@@ -29,8 +29,9 @@ const TodoPage = () => {
 	};
 
 	useEffect(() => {
-		fetchTasks(false);
-	}, []);
+		if (user)
+			fetchTasks(false);
+	}, [user]);
 
 	const [filter, setFilter] = useState("All");
 
@@ -109,7 +110,7 @@ const TodoPage = () => {
 				<header>
 					<h1>Todas as suas tarefas</h1>
 
-					<UserButton user={user} />
+					<UserButton userName={user?.name} />
 				</header>
 
 				<FiltersBtns setedFilter={filter} setFilter={setFilter} />

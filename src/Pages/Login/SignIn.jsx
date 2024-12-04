@@ -26,6 +26,8 @@ const Login = () => {
 	const handleLoginRedirect = async (e) => {
 		let canvelRequest = false;
 
+		setValidationErrors((prev) => ({ ...prev, email: false, password: false }));
+
 		if (email.trim() === "") {
 			setValidationErrors((prev) => ({ ...prev, email: true }));
 			canvelRequest = true;
@@ -51,9 +53,9 @@ const Login = () => {
 				else
 					sessionStorage.setItem("authToken", dataLogin.data?.token || null);
 
-				sessionStorage.setItem("userName", dataLogin.data?.userName || null);
+				sessionStorage.setItem("user", JSON.stringify({ id: dataLogin.data?.userId, name: dataLogin.data?.userName }));
 
-				setUser(dataLogin.data?.userName || null);
+				setUser({ id: dataLogin.data?.userId, name: dataLogin.data?.userName });
 				navigate("/");
 			} catch (error) {
 				alert(error.response.data.error);
@@ -70,7 +72,7 @@ const Login = () => {
 				<div className={`w-100 ${stl.paddingX}`}>
 					<h2 className={stl.fieldName}>Email</h2>
 					<input value={email} id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Insira seu email"
-						className={`${validationErrors.email ? "is-invalid" : ""}`} />
+						className={`${validationErrors.email ? "is-invalid" : ""}`} autoComplete="off" />
 					<span className={`text-error ${validationErrors.emailMsg ? "" : "hidden"}`}>Digite um email válido.</span>
 				</div>
 
