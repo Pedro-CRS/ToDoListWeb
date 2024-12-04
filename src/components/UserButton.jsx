@@ -8,7 +8,7 @@ const DropdownMenu = (user) => {
 
 	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef(null);
-	const [userLogged] = useState({ name: user.user, photo: profilePic });
+	const [userLogged] = useState({ name: user.userName || "", photo: profilePic });
 
 	const toggleDropdown = () => {
 		setIsOpen(!isOpen);

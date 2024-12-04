@@ -10,8 +10,8 @@ api.interceptors.request.use((config) => {
 		config.headers["Authorization"] = `Bearer ${token}`;
 
 	return config;
-	}, (error) => {
-		return Promise.reject(error);
+}, (error) => {
+	return Promise.reject(error);
 });
 
 api.interceptors.response.use((response) => response,
@@ -34,9 +34,9 @@ export const loginUser = async (data) => {
 	return api.post("/auth/login", data);
 };
 
-export const loadCategories = async () => {
+export const loadCategories = async (userId) => {
 	try {
-		const response = await api.get("/categories");
+		const response = await api.get(`/categories?user_id=${userId}`);
 		return response.data;
 	} catch (error) {
 		console.error("Erro ao carregar categorias:", error);
@@ -48,9 +48,9 @@ export const createCategory = async (data) => {
 	return api.post("/categories", data);
 };
 
-export const loadTasks = async () => {
+export const loadTasks = async (userId) => {
 	try {
-		const response = await api.get("/tasks");
+		const response = await api.get(`/tasks?user_id=${userId}`);
 		return response.data;
 	} catch (error) {
 		console.error("Erro ao carregar suas tarefas:", error);
@@ -75,7 +75,7 @@ export const updateTask = async (id, data) => {
 };
 
 export const updateTaskCompletion = async (id, isCompleted) => {
-    return api.patch(`/tasks/${id}/completed`, { isCompleted });
+	return api.patch(`/tasks/${id}/completed`, { isCompleted });
 };
 
 export default api;

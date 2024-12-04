@@ -79,7 +79,7 @@ const Register = () => {
 
 				<div className={`w-100 ${stl.paddingX}`}>
 					<h2 className={stl.fieldName}>Email</h2>
-					<input value={email} className={`${validationErrors.email ? "is-invalid" : ""}`} onChange={(e) => setEmail(e.target.value)} placeholder="Insira seu email" />
+					<input value={email} className={`${validationErrors.email ? "is-invalid" : ""}`} onChange={(e) => setEmail(e.target.value)} placeholder="Insira seu email" autoComplete="off" />
 					<span className={`text-error ${validationErrors.emailMsg ? "" : "hidden"}`}>Digite um email válido.</span>
 				</div>
 

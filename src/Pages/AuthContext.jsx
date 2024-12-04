@@ -6,7 +6,7 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		const userData = sessionStorage.getItem("userName");
+		const userData = JSON.parse(sessionStorage.getItem("user"));
 
 		if (userData)
 			setUser(userData);
