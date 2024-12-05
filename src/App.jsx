@@ -16,7 +16,7 @@ const App = () => {
 		<AuthProvider>
 			<Router>
 				<Routes>
-					<Route path="/" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
+					<Route path="/ToDoListWeb" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
 
 					<Route path="/login" element={<RedirectIfAuthenticated> <Login /> </RedirectIfAuthenticated>} />
 
