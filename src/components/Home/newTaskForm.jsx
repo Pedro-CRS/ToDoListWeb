@@ -2,13 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import stl from "../../Styles/Home.module.css";
 import stlModal from "../../Styles/Modal.module.css";
 import { loadCategories, createCategory, createTask } from "../../api/api";
+import ReactFulColorPicker from "../ColorPicker";
 
 const TaskForm = ({ addToDo, onSave, onClose }) => {
 	const [taskTitle, setTaskTitle] = useState("");
 	const [category, setCategory] = useState("");
 	const [categories, setCategories] = useState([]);
 	const [newCategory, setNewCategory] = useState("");
-
+	const [color, setColor] = useState("#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0"));
 	const [validationErrors, setValidationErrors] = useState({ task: false, category: false, newCategory: false });
 	const [isCreatingCategory, setIsCreatingCategory] = useState(false);
 
@@ -51,12 +52,12 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 		if (!cancelSave) {
 			if (category === "-1" && newCategory) {
 				try {
-					const data = await createCategory({ title: newCategory, user_id: userData.id });
+					const data = await createCategory({ title: newCategory, color: color, user_id: userData.id });
 					const createdCategory = data.data;
 
 					setCategories((prev) => [...prev, data.data]);
 
-					await createTask({ userId: 1, title: taskTitle, categoryId: parseInt(createdCategory.id) });
+					await createTask({ userId: userData.id, title: taskTitle, categoryId: parseInt(createdCategory.id) });
 
 					if (addToDo)
 						addToDo();
@@ -67,7 +68,7 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 			}
 			else {
 				try {
-					await createTask({ userId: 1, title: taskTitle, categoryId: parseInt(category) });
+					await createTask({ userId: userData.id, title: taskTitle, categoryId: parseInt(category) });
 
 					if (addToDo)
 						addToDo();
@@ -112,6 +113,8 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 							<div className={`w-100 ${stlModal.newCategoryInputsDiv}`}>
 								<input className={validationErrors.newCategory ? "is-invalid" : ""} id="newCategory" type="text"
 									placeholder="Digite o título da nova categoria" value={newCategory} onChange={(e) => setNewCategory(e.target.value)} />
+
+								<ReactFulColorPicker color={color} onChange={setColor} />
 							</div>
 						)}
 

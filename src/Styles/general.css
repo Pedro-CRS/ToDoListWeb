@@ -113,3 +113,9 @@ button.btnCancel {
 .text-end {
 	text-align: end;
 }
+
+/* Small */
+.react-colorful {
+	width: 120px !important;
+	height: 120px !important;
+}

@@ -1,13 +1,14 @@
 import { React, useState, useEffect } from "react";
 import stl from "../../Styles/Modal.module.css";
 import { loadCategories, createCategory, updateTask } from "../../api/api";
+import ReactFulColorPicker from "../ColorPicker";
 
 const ToDoModal = ({ task, onSave, onClose }) => {
 	const [taskTitle, setTaskTitle] = useState("");
 	const [category, setCategory] = useState("");
 	const [categories, setCategories] = useState([]);
 	const [newCategory, setNewCategory] = useState("");
-
+	const [color, setColor] = useState("#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0"));
 	const [validationErrors, setValidationErrors] = useState({ task: false, category: false, newCategory: false });
 	const [isCreatingCategory, setIsCreatingCategory] = useState(false);
 
@@ -68,7 +69,7 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 		if (!cancelSave) {
 			if (category === "-1" && newCategory) {
 				try {
-					const data = await createCategory({ title: newCategory, user_id: userData.id });
+					const data = await createCategory({ title: newCategory, color: color, user_id: userData.id });
 					const createdCategory = data.data;
 
 					setCategories((prev) => [...prev, data.data]);
@@ -122,6 +123,8 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 							<div className={`w-100 ${stl.newCategoryInputsDiv}`}>
 								<input className={validationErrors.newCategory ? "is-invalid" : ""} id="newCategory" type="text"
 									placeholder="Digite o título da nova categoria" value={newCategory} onChange={(e) => setNewCategory(e.target.value)} />
+
+								<ReactFulColorPicker color={color} onChange={setColor} />
 							</div>
 						)}
 					</div>

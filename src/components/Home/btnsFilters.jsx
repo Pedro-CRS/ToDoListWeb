@@ -41,7 +41,7 @@ const HeaderBtnsActions = ({ setedFilter, setFilter }) => {
 						</div>
 					</div>
 
-					<div className={`${stl.orderSection}`} >
+					{/* <div className={`${stl.orderSection}`} >
 						<div className={`${stl.selectWrapper}`}>
 							<label htmlFor="typeSelect">Ordernar por:</label>
 							<select id="typeSelect">
@@ -58,7 +58,7 @@ const HeaderBtnsActions = ({ setedFilter, setFilter }) => {
 								<option value="desc">Descendente</option>
 							</select>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			)}
 		</div>
