@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 		const token = localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
 
 		if (token) {
-			api.get("/auth/validate-token").then((response) => {
+			api.get("/auth/validateToken").then((response) => {
 				const { userId, userName } = response.data;
 				setUser({ id: userId, name: userName });
 
