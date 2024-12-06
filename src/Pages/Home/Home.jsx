@@ -101,6 +101,9 @@ const TodoPage = () => {
 		setIsModalOpen(false);
 	};
 
+	if (user === null)
+		return <p>Carregando...</p>
+
 	if (!user)
 		return <p>Ocorreu algum error ao buscar seus dados...</p>;
 
