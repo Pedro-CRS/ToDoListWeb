@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import stl from "../../Styles/Login.module.css";
 import { loginUser } from "../../api/api";
@@ -10,8 +10,9 @@ const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isChecked, setIsChecked] = useState(false);
-	const [validationErrors, setValidationErrors] = useState({ email: false, password: false });
+	const [validationErrors, setValidationErrors] = useState({ email: false, password: false, errorMsg: false });
 	const { setUser } = useContext(AuthContext);
+	const [loading, setLoading] = useState(false);
 
 	const handleSignUpRedirect = (event) => {
 		event.preventDefault();
@@ -24,9 +25,10 @@ const Login = () => {
 	};
 
 	const handleLoginRedirect = async (e) => {
+		setLoading(true);
 		let canvelRequest = false;
 
-		setValidationErrors((prev) => ({ ...prev, email: false, password: false }));
+		setValidationErrors((prev) => ({ ...prev, email: false, password: false, errorMsg: false }));
 
 		if (email.trim() === "") {
 			setValidationErrors((prev) => ({ ...prev, email: true }));
@@ -58,14 +60,30 @@ const Login = () => {
 				setUser({ id: dataLogin.data?.userId, name: dataLogin.data?.userName });
 				navigate("/");
 			} catch (error) {
-				alert(error.response.data.error);
+				setValidationErrors((prev) => ({ ...prev, errorMsg: true }));
+			}
+			finally {
+				setLoading(false);
 			}
 		}
+		else
+			setLoading(false);
 	}
+
+	useEffect(() => {
+		const rootElement = document.getElementById("root");
+
+		if (loading)
+			rootElement.classList.add("loader");
+		else
+			rootElement.classList.remove("loader");
+
+		return () => rootElement.classList.remove("loader");
+	}, [loading]);
 
 	return (
 		<div className={stl.page}>
-			<form className={stl.loginBox}>
+			<form className={stl.loginBox} onSubmit={(e) => e.preventDefault()}>
 				<h1 className={stl.title}>Bem vindo ao CheckIt</h1>
 				<h2 className={stl.subtitle}>Por favor, insira suas credenciais para acessar suas tarefas.</h2>
 
@@ -86,6 +104,8 @@ const Login = () => {
 					<input id="remeberChk" className={stl.checkbox} type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
 					<label htmlFor="remeberChk" className={stl.subtitle}>Continuar conectado</label>
 				</div>
+
+				<p className={`text-error ${validationErrors.errorMsg ? "" : "hidden"}`}>O email e/ou senha digitados estão incorretos.</p>
 
 				<button className={stl.signIn} type="button" onClick={handleLoginRedirect}>Entrar</button>
 

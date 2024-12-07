@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { HexColorPicker } from "react-colorful";
-import stlModal from "../Styles/Modal.module.css";
+import stlModal from "../Styles/ColorPicker.module.css";
 
 const ReactFulColorPicker = ({ color, onChange }) => {
 	return (

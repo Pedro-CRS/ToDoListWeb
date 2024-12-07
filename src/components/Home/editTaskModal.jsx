@@ -11,16 +11,21 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 	const [color, setColor] = useState("#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0"));
 	const [validationErrors, setValidationErrors] = useState({ task: false, category: false, newCategory: false });
 	const [isCreatingCategory, setIsCreatingCategory] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const userData = JSON.parse(sessionStorage.getItem("user"));
 
 	useEffect(() => {
 		const fetchCategories = async () => {
+			setLoading(true);
 			try {
 				const data = await loadCategories(userData.id);
 				setCategories(data);
 			} catch (error) {
-				console.error("Erro ao carregar categorias", error);
+				alert("Erro ao carregar categorias.");
+			}
+			finally {
+				setLoading(false);
 			}
 		};
 
@@ -47,6 +52,7 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 
 	const handleSaveEdit = async (e) => {
 		e.preventDefault();
+		setLoading(true);
 
 		let cancelSave = false;
 		setValidationErrors((prev) => ({ ...prev, task: false, category: false, newCategory: false }));
@@ -80,7 +86,10 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 						onSave();
 
 				} catch (error) {
-					alert("Erro ao editar tarefa.", error);
+					alert("Erro ao criar editar tarefa.");
+				}
+				finally {
+					setLoading(false);
 				}
 			}
 			else {
@@ -91,11 +100,27 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 						onSave();
 
 				} catch (error) {
-					alert("Erro ao editar tarefa.", error);
+					alert("Erro ao editar tarefa.");
+				}
+				finally {
+					setLoading(false);
 				}
 			}
 		}
+		else
+			setLoading(false);
 	}
+
+	useEffect(() => {
+		const rootElement = document.getElementById("root");
+
+		if (loading)
+			rootElement.classList.add("loader");
+		else
+			rootElement.classList.remove("loader");
+
+		return () => rootElement.classList.remove("loader");
+	}, [loading]);
 
 	return (
 		<div className={stl.modalOverlay}>
