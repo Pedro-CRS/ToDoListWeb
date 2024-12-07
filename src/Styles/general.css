@@ -119,3 +119,21 @@ button.btnCancel {
 	width: 120px !important;
 	height: 120px !important;
 }
+
+.loader {
+	position: relative;
+	overflow: hidden;
+}
+
+.loader::after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: url(../img/loading.gif) no-repeat center center;
+	background-color: rgba(200, 200, 200, .5);
+	content: " ";
+	display: block;
+	z-index: 99998;
+}

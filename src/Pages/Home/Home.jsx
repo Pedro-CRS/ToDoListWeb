@@ -14,8 +14,10 @@ import withReactContent from "sweetalert2-react-content";
 const TodoPage = () => {
 	const { user, logout } = useContext(AuthContext);
 	const [todos, setTodos] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const fetchTasks = async (closeModal = true) => {
+		setLoading(true);
 		try {
 			const data = await loadTasks(user.id);
 			setTodos(data);
@@ -24,7 +26,10 @@ const TodoPage = () => {
 				handleCloseModal();
 
 		} catch (error) {
-			console.error("Erro ao carregar tarefas.", error);
+			alert("Erro ao carregar tarefas.");
+		}
+		finally {
+			setLoading(false);
 		}
 	};
 
@@ -36,6 +41,7 @@ const TodoPage = () => {
 	const [filter, setFilter] = useState("All");
 
 	const completeToDo = async (id, completedStatus) => {
+		setLoading(true);
 		try {
 			await updateTaskCompletion(id, completedStatus);
 
@@ -44,8 +50,12 @@ const TodoPage = () => {
 					task.id === id ? { ...task, isCompleted: completedStatus } : task
 				)
 			);
-
-		} catch (error) { }
+		} catch (error) {
+			alert("Ops! Ocorreu algum problema ao marcar a tarefa como completa, tente novamente, se o error persistir entre em contato com nossa equipe.");
+		}
+		finally {
+			setLoading(false);
+		}
 	}
 
 	const handleDeleteTask = (id) => {
@@ -63,16 +73,17 @@ const TodoPage = () => {
 			customClass: { confirmButton: "btnSave", cancelButton: "btnCancel" },
 		}).then(async (result) => {
 			if (result.isConfirmed) {
+				setLoading(true);
 				try {
 					await deleteTask(id);
-					fetchTasks();
+
+					await fetchTasks();
 
 					Swal.fire({
 						title: "Tarefa excluída com sucesso!",
 						icon: "success",
 						heightAuto: false,
 					});
-
 				} catch (error) {
 					Swal.fire({
 						title: "Erro ao excluir a tarefa!",
@@ -80,6 +91,9 @@ const TodoPage = () => {
 						icon: "error",
 						heightAuto: false,
 					});
+				}
+				finally {
+					setLoading(false);
 				}
 			}
 		});
@@ -100,6 +114,17 @@ const TodoPage = () => {
 	const handleCloseModal = () => {
 		setIsModalOpen(false);
 	};
+
+	useEffect(() => {
+		const rootElement = document.getElementById("root");
+
+		if (loading)
+			rootElement.classList.add("loader");
+		else
+			rootElement.classList.remove("loader");
+
+		return () => rootElement.classList.remove("loader");
+	}, [loading]);
 
 	if (!user)
 		return <p>Ocorreu algum error ao buscar seus dados...</p>;
