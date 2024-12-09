@@ -33,7 +33,7 @@ export const loadCategories = async (userId) => {
 		const response = await api.get(`/categories?user_id=${userId}`);
 		return response.data;
 	} catch (error) {
-		alert("Erro ao carregar categorias.");
+		alert("Erro ao carregar categorias:", error);
 		throw error;
 	}
 };
@@ -47,7 +47,7 @@ export const loadTasks = async (userId) => {
 		const response = await api.get(`/tasks?user_id=${userId}`);
 		return response.data;
 	} catch (error) {
-		alert("Erro ao carregar suas tarefas.");
+		alert("Erro ao carregar suas tarefas:", error);
 		throw error;
 	}
 };

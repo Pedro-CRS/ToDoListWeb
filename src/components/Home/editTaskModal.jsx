@@ -22,7 +22,7 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 				const data = await loadCategories(userData.id);
 				setCategories(data);
 			} catch (error) {
-				alert("Erro ao carregar categorias");
+				alert("Erro ao carregar categorias.");
 			}
 			finally {
 				setLoading(false);
