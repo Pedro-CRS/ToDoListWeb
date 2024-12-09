@@ -69,7 +69,10 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 						addToDo();
 
 				} catch (error) {
-					alert("Erro ao criar categoria e/ou tarefa.", error);
+					alert("Erro ao criar categoria e/ou tarefa.");
+				}
+				finally {
+					setLoading(false);
 				}
 				finally {
 					setLoading(false);
@@ -83,7 +86,10 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 						addToDo();
 
 				} catch (error) {
-					alert("Erro ao criar tarefa.", error);
+					alert("Erro ao criar tarefa.");
+				}
+				finally {
+					setLoading(false);
 				}
 				finally {
 					setLoading(false);

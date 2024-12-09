@@ -86,7 +86,7 @@ const ToDoModal = ({ task, onSave, onClose }) => {
 						onSave();
 
 				} catch (error) {
-					alert("Erro ao criar editar tarefa.");
+					alert("Erro ao editar tarefa.");
 				}
 				finally {
 					setLoading(false);
