@@ -74,9 +74,6 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 				finally {
 					setLoading(false);
 				}
-				finally {
-					setLoading(false);
-				}
 			}
 			else {
 				try {
@@ -87,9 +84,6 @@ const TaskForm = ({ addToDo, onSave, onClose }) => {
 
 				} catch (error) {
 					alert("Erro ao criar tarefa.");
-				}
-				finally {
-					setLoading(false);
 				}
 				finally {
 					setLoading(false);
