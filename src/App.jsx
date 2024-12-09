@@ -14,7 +14,7 @@ import { AuthProvider } from "./Pages/AuthContext.jsx";
 const App = () => {
 	return (
 		<AuthProvider>
-			<Router>
+			<Router basename="/ToDoListWeb">
 				<Routes>
 					<Route path="/" element={<ProtectedRoute> <HomePage /> </ProtectedRoute>} />
 

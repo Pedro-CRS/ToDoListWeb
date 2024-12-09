@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import stl from "../../Styles/Login.module.css";
 import { registerUser } from "../../api/api";
@@ -13,6 +13,7 @@ const Register = () => {
 	const [validationErrors, setValidationErrors] = useState({
 		name: false, email: false, password: false, confirmPassword: false, errorMsg: false
 	});
+	const [loading, setLoading] = useState(false);
 
 	const handleSignInRedirect = (event) => {
 		event.preventDefault();
@@ -21,6 +22,7 @@ const Register = () => {
 	};
 
 	const handleRegisterUser = async (e) => {
+		setLoading(true);
 		let canvelRequest = false;
 
 		setValidationErrors((prev) => ({ ...prev, name: false, email: false, password: false, confirmPassword: false, errorMsg: false, emailMsg: false }));
@@ -61,14 +63,30 @@ const Register = () => {
 				await registerUser(userData);
 				navigate("/login");
 			} catch (error) {
-				alert(error.response.data.error);
+				alert("Ops! Ocorreu algum problema, tente novamente, se o error persistir entre em contato com nossa equipe.");
+			}
+			finally {
+				setLoading(false);
 			}
 		}
+		else
+			setLoading(false);
 	};
+
+	useEffect(() => {
+		const rootElement = document.getElementById("root");
+
+		if (loading)
+			rootElement.classList.add("loader");
+		else
+			rootElement.classList.remove("loader");
+
+		return () => rootElement.classList.remove("loader");
+	}, [loading]);
 
 	return (
 		<div className={stl.page}>
-			<form className={stl.loginBox}>
+			<form className={stl.loginBox} onSubmit={(e) => e.preventDefault()}>
 				<h1 className={stl.title}>Crie sua conta</h1>
 				<h2 className={stl.subtitle}>Por favor, preencha os campos abaixo para registrar-se e comece gerenciar suas tarefas.</h2>
 

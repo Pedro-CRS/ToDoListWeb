@@ -16,12 +16,6 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use((response) => response,
 	(error) => {
-		if (error.response?.status === 401 || error.response?.status === 403) {
-			localStorage.removeItem("authToken");
-			sessionStorage.removeItem("authToken");
-			window.location.href = "/login";
-		}
-
 		return Promise.reject(error);
 	}
 );
@@ -39,7 +33,7 @@ export const loadCategories = async (userId) => {
 		const response = await api.get(`/categories?user_id=${userId}`);
 		return response.data;
 	} catch (error) {
-		console.error("Erro ao carregar categorias:", error);
+		alert("Erro ao carregar categorias.");
 		throw error;
 	}
 };
@@ -53,7 +47,7 @@ export const loadTasks = async (userId) => {
 		const response = await api.get(`/tasks?user_id=${userId}`);
 		return response.data;
 	} catch (error) {
-		console.error("Erro ao carregar suas tarefas:", error);
+		alert("Erro ao carregar suas tarefas.");
 		throw error;
 	}
 };
