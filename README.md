@@ -61,8 +61,8 @@ Welcome to ToDoList, an application for managing your tasks in an efficient and 
 - **Criptografia de Senhas**: bcrypt  
   **Password Encryption**: bcrypt
 
-- **O código do backend desse pode ser acessado em**:  
-  **The code for this backend can be accessed at**:  
+- **O código do backend desse projeto pode ser acessado em**:  
+  **The backend code for this project can be accessed at**:  
   [ToDoListWeb Backend](https://github.com/Pedro-CRS/ToDoListWeb_Backend)
 
 ---
